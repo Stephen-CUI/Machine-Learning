@@ -1,0 +1,37 @@
+\chapter{Classifying Images with Deep Convolutional Neural Networks\label{Ch14}}
+\section{The building blocks of CNNs}
+\subsection{Discrete convolutions in one dimension}
+\subsubsection*{Determining the size of the convolution output}
+The output size of a convolution is determined by the total number of times that we shift the filter, $\bm{w}$, along the input vector. Let's assume that the input vector is of size $n$ and the filter is of size $m$. Then, the size of the output resulting from $\bm{y}=\bm{x}*\bm{w}$ , with padding $p$ and stride $s$, would be determined as follows:
+\begin{equation}
+    o=\Bigl\lfloor\frac{n+2p-m}{s}\Bigr\rfloor+1
+\end{equation}
+
+\subsection{Subsampling layers}
+Subsampling is typically applied in two forms of pooling operations in CNNs: max-pooling and
+mean-pooling (also known as average-pooling). The pooling layer is usually denoted by $P_{n_1\times n_2}$.
+
+The advantage of pooling is twofold:
+\begin{itemize}
+    \item Pooling (max-pooling) introduces a local invariance. This means that small changes in a local neighborhood do not change the result of max-pooling. Therefore, it helps with generating features that are more robust to noise in the input data.
+    \item Pooling decreases the size of features, which results in higher computational efficiency. Furthermore, reducing the number of features may reduce the degree of overfitting as well.
+\end{itemize}
+
+\begin{tcolorbox}[title=Overlapping versus non-overlapping pooling]
+    Traditionally, pooling is assumed to be non-overlapping. Pooling is typically performed on non-overlapping neighborhoods, which can be done by setting the stride parameter equal to the pooling size. For example, a non-overlapping pooling layer, $P_{n_1\times n_2}$ , requires a stride parameter $s = (n_1, n_2)$. On the other hand, overlapping pooling occurs if the stride is smaller than the pooling size.
+\end{tcolorbox}
+\section{构建卷积神经网络}
+\subsection{处理多个输入通道}
+\figures{fig14-9}{Implementing a CNN}
+
+\section{使用卷积神经网络对人脸图像进行微笑分类}
+\subsection{图像转化和数据增广}
+以用五种不同类型的转换：
+\begin{itemize}
+    \item 用一个边界框剪裁图像 cropping an image to a bounding box
+    \item 水平翻转图像 flipping an image horizontally
+    \item 调整对比度 adjusting the contrast
+    \item 调整亮度 adjusting the brightness
+    \item 剪裁中心图像并将生成的图像调整为原始大小 center-cropping an image and resizing the resulting image back to
+          its original size
+\end{itemize}
